@@ -42,7 +42,7 @@ private:
 SkipList::SkipList() {
     level = 1;  // 初始层数为1
     // 创建头节点，使用负无穷大作为最小值
-    header = new Node(std::numeric_limits<int>::min(), MAX_LEVEL);
+    header = new Node( numeric_limits<int>::min(), MAX_LEVEL);
     srand(static_cast<unsigned>(time(0)));  // 设置随机数种子
 }
 

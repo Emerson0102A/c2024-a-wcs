@@ -2,24 +2,53 @@
 // Created by Emerson on 2024/9/27.
 //
 #include <iostream>
+#include <fstream>
 using namespace std;
 //地图
-int maze[5][5] = {
-    {0,1,0,0,0},
-    {0,1,0,1,0},
-    {0,1,0,1,0},
-    {0,1,0,1,0},
-    {0,0,0,1,0}
-};
+// int maze[5][5] = {
+//     {0,1,0,0,0},
+//     {0,1,0,1,0},
+//     {0,1,0,1,0},
+//     {0,1,0,1,0},
+//     {0,0,0,1,0}
+// };
+
+const int ROWS = 5;
+const int COLS = 5;
+int maze[ROWS][COLS];
 
 //玩家
 int x = 0, y = 0;
 //目的地
 int targetX = 4,targetY = 4;
+
+bool loadMap(const string& filename) {
+    ifstream file(filename);
+    if (!file) {
+        cout << "没有了" << endl;
+        return false;
+    }
+    for (int i = 0; i < ROWS; ++i) {
+        for (int j = 0; j < COLS; ++j) {
+            file >> maze[i][j];
+        }
+    }
+    file.close();
+
+    //每次初始化时，都将玩家置于起点
+    x = 0;
+    y = 0;
+    //目标地
+    targetX = ROWS - 1;
+    targetY = COLS - 1;
+
+
+    return true;
+}
 //地图绘制
 void printMaze() {
-    for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 5; ++j) {
+    for (int i = 0; i < ROWS; ++i) {
+        for (int j = 0; j < COLS; ++j) {
             if (i == x && j == y) {
                 cout << "P ";
             }
@@ -29,7 +58,7 @@ void printMaze() {
             else if (maze[i][j] == 0) {
                 cout << ". ";
             }
-            else {
+            else if (maze[i][j] == 1) {
                 cout << "# ";
             }
         }
@@ -39,7 +68,7 @@ void printMaze() {
 
 //行动是否有效
 bool isValid(int newX, int newY) {
-    if (newX >= 0 && newX < 5 && newY >= 0 && newY < 5) {
+    if (newX >= 0 && newX < ROWS && newY >= 0 && newY < COLS) {
         if (maze[newX][newY] == 0) {
             return true;
         }
@@ -75,15 +104,31 @@ void Move(char& command) {
 }
 
 int main() {
-    char command;
-    while (1) {
-        printMaze();
-        cout << "输入指令" << endl;
-        cin >> command;
-        Move(command);
-        if (x == targetX && y == targetY) {
-            cout << "WIN" << endl;
+    int level = 1;
+
+    while (true) {
+        //动态构建文件名
+        string filename = "map" + to_string(level) + ".txt";
+        if (!loadMap(filename)) {
+            cout << "真的一关也没有了" << endl;
             break;
+        }
+
+        cout << "加载关卡"  << level << "成功" << endl;
+
+        char command;
+        while (true) {
+            printMaze(); // 显示地图
+            cout << "输入指令 (W/A/S/D 控制上下左右): ";
+            cin >> command;
+            Move(command); // 移动玩家
+
+            // 判断是否到达目的地
+            if (x == targetX && y == targetY) {
+                cout << "关卡 " << level << " 完成！" << endl;
+                level++; // 进入下一关
+                break;
+            }
         }
     }
     return 0;
