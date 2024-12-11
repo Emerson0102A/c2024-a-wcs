@@ -18,9 +18,9 @@ const int COLS = 5;
 int maze[ROWS][COLS];
 
 //玩家
-int x = 0, y = 0;
+int x, y;
 //目的地
-int targetX = 4,targetY = 4;
+int targetX,targetY;
 
 bool loadMap(const string& filename) {
     ifstream file(filename);

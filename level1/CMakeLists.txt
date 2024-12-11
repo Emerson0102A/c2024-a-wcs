@@ -22,7 +22,8 @@ add_executable(p07_maze p07_maze/main.c
         p07_maze/p07_sol1.cpp)
 
 add_executable(p08_push_boxes p08_push_boxes/main.c
-        p08_push_boxes/p08_sol1.cpp)
+        p08_push_boxes/p08_sol1.cpp
+)
 
 add_executable(p09_linked_list p09_linked_list/main.c
         p09_linked_list/p09_sol1.cpp)

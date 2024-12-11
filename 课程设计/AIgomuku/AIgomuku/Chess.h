@@ -14,7 +14,7 @@ struct ChessPos {
 
 typedef enum {
 	CHESS_WHITE = -1, //°×Æå
-	CHESS_BLACK = 1 //ºÚÆå
+	CHESS_BLACK = 1, //ºÚÆå
 }chess_kind_t;
 
 class Chess

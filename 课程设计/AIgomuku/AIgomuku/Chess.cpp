@@ -191,14 +191,14 @@ bool Chess::checkOver()
 	if (checkWin()) {
 		Sleep(1500);
 		if (playerFlag == false) {//ºÚ×ÓÓ®ÁË
-			mciSendString("play res/²»´í.mp3", 0, 0, 0);
-			loadimage(0, "res/Ê¤Àû.jpg");
+			mciSendString("play res/correct_answer3.mp3", 0, 0, 0);
+			loadimage(0, "res/Ö»ÀÇ.png");
 
 
 		}
 		else {//°××ÓÓ®ÁË
-			mciSendString("play res/Ê§°Ü.mp3", 0, 0, 0);
-			loadimage(0, "res/Ê§°Ü.jpg");
+			mciSendString("play res/dropping.mp3", 0, 0, 0);
+			loadimage(0, "res/Ê§°Ü3.png");
 		}
 
 		_getch();//ÔÝÍ£

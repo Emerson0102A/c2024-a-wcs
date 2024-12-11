@@ -2,23 +2,44 @@
 // Created by Emerson on 2024/9/27.
 //
 #include <iostream>
+#include <fstream>
 using namespace std;
 //地图
-int maze[5][5] = {
-    {0,0,0,0,0},
-    {0,0,0,0,0},
-    {0,0,1,0,0},
-    {0,0,0,0,0},
-    {0,0,0,0,0}
-};
+// int maze[5][5] = {
+//     {0,0,0,0,0},
+//     {0,0,0,0,0},
+//     {0,0,1,0,0},
+//     {0,0,0,0,0},
+//     {0,0,0,0,0}
+// };
 
-//玩家
-int x = 0, y = 0;
-//箱子
-int boxX = 1,boxY = 1;
-//目的地
-int targetX = 4,targetY = 4;
-//地图绘制
+int x, y, boxX, boxY, targetX, targetY;
+const int ROWS = 5;
+const int COLS = 5;
+int maze[ROWS][COLS];
+
+bool loadMap(const string& filename) {
+    ifstream file(filename);
+    if(!file) {
+        cout << "没有了" << endl;
+        return false;
+    }
+    for(int i = 0;i < ROWS;i++) {
+        for(int j = 0;j < COLS;j++) {
+            file >> maze[i][j];
+        }
+    }
+    file.close();
+    x = 0;
+    y = 0;
+    boxX = 1;
+    boxY = 1;
+    targetX = ROWS - 1;
+    targetY = COLS - 1;
+    return true;
+}
+
+
 void printMaze() {
     for (int i = 0; i < 5; ++i) {
         for (int j = 0; j < 5; ++j) {
@@ -34,7 +55,7 @@ void printMaze() {
             else if (maze[i][j] == 0) {
                 cout << ". ";
             }
-            else {
+            else if (maze[i][j] == 1) {
                 cout << "# ";
             }
         }
@@ -96,16 +117,28 @@ void Move(char& command) {
 }
 
 int main() {
-    char command;
-    while (1) {
-        printMaze();
-        cout << "输入指令" << endl;
-        cin >> command;
-        Move(command);
-        if (boxX == targetX && boxY == targetY) {
-            cout << "WIN" << endl;
+    int level = 1;
+
+    while (true) {
+        string filename = "boxmap" + to_string(level) + ".txt";
+        if (!loadMap(filename)) {
+            cout << "真的没有了" << endl;
             break;
         }
+        char command;
+        while(true) {
+            printMaze();
+            cout << "输入指令" << endl;
+            cin >> command;
+            Move(command);
+            if (boxX == targetX && boxY == targetY) {
+                cout << "WIN" << endl;
+                level++;
+                break;
+            }
+        }
     }
+
+
     return 0;
 }
