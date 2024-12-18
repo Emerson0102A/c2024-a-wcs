@@ -32,3 +32,6 @@
 117	1283	7529357479589395	CMakeFiles/p10_warehouse.dir/p10_warehouse/p10_sol1.cpp.obj	95a012c2b443ff0e
 35	486	7529374710305948	CMakeFiles/p08_push_boxes.dir/p08_push_boxes/test.c.obj	438e6581aaec1537
 101	502	7529371664070887	CMakeFiles/p08_push_boxes.dir/p08_push_boxes/t.c.obj	d4272da678652aee
+15	7793	7559652573652132	CMakeFiles/p02_is_prime.dir/p02_is_prime/main.c.obj	86b8ac3c218038bf
+730	7795	7559652580808265	CMakeFiles/p02_is_prime.dir/p02_is_prime/p02_sol1.cpp.obj	bd3e1068d135e9a0
+7795	11055	7559652651454856	p02_is_prime.exe	ce3b6bd391d41609
